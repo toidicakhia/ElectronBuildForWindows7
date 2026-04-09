@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout current repo
@@ -16,12 +16,11 @@ jobs:
           git clone https://github.com/CherryHQ/cherry-studio.git
           cd cherry-studio
 
-      - name: Setup Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v6
-        with:
-          node-version: 20
-          cache: pnpm
-          cache-dependency-path: cherry-studio/pnpm-lock.yaml
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
 
       - name: Install dependencies
         working-directory: cherry-studio
