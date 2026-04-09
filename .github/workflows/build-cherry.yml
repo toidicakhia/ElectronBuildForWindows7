@@ -1,0 +1,38 @@
+name: Build Cherry Studio (external)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+      - name: Checkout current repo
+        uses: actions/checkout@v4
+
+      - name: Clone Cherry Studio
+        run: |
+          git clone https://github.com/CherryHQ/cherry-studio.git
+          cd cherry-studio
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        working-directory: cherry-studio
+        run: pnpm i
+
+      - name: Install electron@37.2.2
+        working-directory: cherry-studio
+        run: pnpm i electron@37.2.2
+
+      - name: Build app
+        working-directory: cherry-studio
+        run: npm build:win:x64
