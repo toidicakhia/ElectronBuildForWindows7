@@ -43,6 +43,9 @@ jobs:
           rm -rf cherry-studio/node_modules/electron@37.2.2/dist
           mv dist cherry-studio/node_modules/electron@37.2.2
 
+      - name: List files in electron dist
+        run: ls -la cherry-studio/node_modules/electron@37.2.2/dist
+
       - name: Build app
         working-directory: cherry-studio
         run: pnpm build:win:x64
