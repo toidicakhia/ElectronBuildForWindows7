@@ -53,13 +53,9 @@ jobs:
         run: unzip dist.zip -d dist
 
       - name: Replace electron with custom version
-        working-directory: cherry-studio
         run: |
-          ELECTRON_PATH=$(Get-ChildItem -Recurse -Directory node_modules | Where-Object { $_.FullName -like "*electron@37.2.2*\\node_modules\\electron" } | Select-Object -First 1).FullName
-          echo "Electron path: $ELECTRON_PATH"
-
-          Remove-Item "$ELECTRON_PATH/dist" -Recurse -Force
-          Move-Item ../dist "$ELECTRON_PATH/"
+          rm -rf cherry-studio/node_modules/electron@37.2.2/dist
+          mv dist cherry-studio/node_modules/electron@37.2.2
 
       - name: Build Cherry Studio
         working-directory: cherry-studio
