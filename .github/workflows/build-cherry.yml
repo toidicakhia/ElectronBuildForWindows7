@@ -38,17 +38,17 @@ jobs:
       - name: Unzip custom electron
         run: unzip dist.zip -d dist
 
-      - name: List files in electron dist
-        run: ls -la .pnpm/electron@37.2.2/node_modules/electron/dist
-
       - name: Replace electron with custom version
+        working-directory: cherry-studio
         run: |
-          rm -rf .pnpm/electron@37.2.2/node_modules/electron/dist
-          mv dist .pnpm/electron@37.2.2/node_modules/electron
+          ELECTRON_PATH=$(find node_modules -type d -path "*electron@37.2.2/node_modules/electron" | head -n 1)
+          echo "Electron path: $ELECTRON_PATH"
 
-      - name: List files in electron dist
-        run: ls -la .pnpm/electron@37.2.2/node_modules/electron/dist
+          rm -rf "$ELECTRON_PATH/dist"
+          mv ../dist "$ELECTRON_PATH/"
 
-      # - name: Build app
-      #   working-directory: cherry-studio
-      #   run: pnpm build:win:x64
+      - name: Verify replacement
+        working-directory: cherry-studio
+        run: |
+          ELECTRON_PATH=$(find node_modules -type d -path "*electron@37.2.2/node_modules/electron" | head -n 1)
+          ls -la "$ELECTRON_PATH/dist"
