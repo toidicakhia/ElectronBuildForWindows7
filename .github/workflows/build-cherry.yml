@@ -40,8 +40,8 @@ jobs:
 
       - name: Replace electron with custom version
         run: |
-          rm -rf cherry-studio/node_modules/electron@37.2.2
-          mv dist cherry-studio/node_modules/electron@37.2.2
+          rm -rf cherry-studio/node_modules/electron@37.2.2/dist
+          mv dist cherry-studio/node_modules/electron@37.2.2/dist
 
       - name: Build app
         working-directory: cherry-studio
