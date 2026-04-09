@@ -52,7 +52,7 @@ jobs:
         run: pnpm build:win:x64
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: cherry-studio-build
-          files: cherry-studio/dist/win-unpacked/*
+          path: cherry-studio/dist/win-unpacked/*.exe
