@@ -30,7 +30,17 @@ jobs:
 
       - name: Install dependencies (no scripts)
         working-directory: cherry-studio
-        run: pnpm install
+        run: pnpm install --ignore-scripts
+
+      - name: Replace shutdown handler
+        working-directory: cherry-studio
+        run: |
+          pnpm remove @paymoapp/electron-shutdown-handler
+          pnpm add github:get-wrecked/electron-shutdown-handler
+
+      - name: Rebuild native modules
+        working-directory: cherry-studio
+        run: pnpm rebuild
 
       - name: Install electron@37.2.2
         working-directory: cherry-studio
