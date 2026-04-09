@@ -41,8 +41,8 @@ jobs:
       - name: Replace electron with custom version
         run: |
           rm -rf cherry-studio/node_modules/electron@37.2.2
-          mv dist/electron cherry-studio/node_modules/electron@37.2.2
-          
+          mv dist cherry-studio/node_modules/electron@37.2.2
+
       - name: Build app
         working-directory: cherry-studio
         run: pnpm build:win:x64
