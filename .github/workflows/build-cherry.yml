@@ -39,15 +39,15 @@ jobs:
         run: unzip dist.zip -d dist
 
       - name: List files in electron dist
-        run: ls -la cherry-studio/node_modules/electron@37.2.2
+        run: ls -la cherry-studio/node_modules/electron
 
       - name: Replace electron with custom version
         run: |
-          rm -rf cherry-studio/node_modules/electron@37.2.2/dist
-          mv dist cherry-studio/node_modules/electron@37.2.2
+          rm -rf cherry-studio/node_modules/electron/dist
+          mv dist cherry-studio/node_modules/electron/dist
 
       - name: List files in electron dist
-        run: ls -la cherry-studio/node_modules/electron@37.2.2
+        run: ls -la cherry-studio/node_modules/electron
 
       # - name: Build app
       #   working-directory: cherry-studio
