@@ -20,9 +20,6 @@ jobs:
         with:
           node-version: 20
 
-      - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
-
       - name: Install pnpm
         uses: pnpm/action-setup@v5
         with:
