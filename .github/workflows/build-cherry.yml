@@ -61,6 +61,11 @@ jobs:
 
           Move-Item -Path "dist" -Destination $electronPath
 
+      - name: Replace paymoapp/electron-shutdown-handler with get-wrecked/electron-shutdown-handler in file PowerMonitorService
+        shell: pwsh
+        working-directory: cherry-studio
+        run: (Get-Content "src/main/services/PowerMonitorService.ts") -replace "paymoapp", "get-wrecked" | Set-Content "src/main/services/PowerMonitorService.ts"
+
       - name: Build Cherry Studio
         working-directory: cherry-studio
         run: pnpm build:win:x64
