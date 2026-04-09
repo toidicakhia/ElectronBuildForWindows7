@@ -38,6 +38,9 @@ jobs:
       - name: Unzip custom electron
         run: unzip dist.zip -d dist
 
+      - name: List files in electron dist
+        run: ls -la cherry-studio/node_modules/electron@37.2.2
+
       - name: Replace electron with custom version
         run: |
           rm -rf cherry-studio/node_modules/electron@37.2.2/dist
