@@ -16,16 +16,12 @@ jobs:
           git clone https://github.com/CherryHQ/cherry-studio.git
           cd cherry-studio
 
-      - name: Use pnpm
-        uses: pnpm/action-setup@v5
-        with:
-          version: 10.27.0
-
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 20
           cache: pnpm
+          cache-dependency-path: cherry-studio/pnpm-lock.yaml
 
       - name: Install dependencies
         working-directory: cherry-studio
