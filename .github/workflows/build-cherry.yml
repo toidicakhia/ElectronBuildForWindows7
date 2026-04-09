@@ -47,8 +47,12 @@ jobs:
           rm -rf "$ELECTRON_PATH/dist"
           mv ../dist "$ELECTRON_PATH/"
 
-      - name: Verify replacement
+      - name: Build Cherry Studio
         working-directory: cherry-studio
-        run: |
-          ELECTRON_PATH=$(find node_modules -type d -path "*electron@37.2.2/node_modules/electron" | head -n 1)
-          ls -la "$ELECTRON_PATH/dist"
+        run: pnpm build:win:x64
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: cherry-studio-build
+          files: cherry-studio/dist/win-unpacked/*
