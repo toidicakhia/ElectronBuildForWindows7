@@ -25,15 +25,12 @@ jobs:
         with:
           version: 10
 
+      - name: Apply patches
+        run: git -C cherry-studio apply ../patches/0001-Patch-Cherry-Studio.patch
+
       - name: Install dependencies (no scripts)
         working-directory: cherry-studio
         run: pnpm install --ignore-scripts
-
-      - name: Replace shutdown handler
-        working-directory: cherry-studio
-        run: |
-          pnpm remove @paymoapp/electron-shutdown-handler
-          pnpm add github:get-wrecked/electron-shutdown-handler
 
       - name: Rebuild native modules
         working-directory: cherry-studio
@@ -60,11 +57,6 @@ jobs:
           }
 
           Move-Item -Path "dist" -Destination $electronPath
-
-      - name: Replace paymoapp/electron-shutdown-handler with get-wrecked/electron-shutdown-handler in file PowerMonitorService
-        shell: pwsh
-        working-directory: cherry-studio
-        run: (Get-Content "src/main/services/PowerMonitorService.ts") -replace "@paymoapp", "get-wrecked" | Set-Content "src/main/services/PowerMonitorService.ts"
 
       - name: Build Cherry Studio
         working-directory: cherry-studio
