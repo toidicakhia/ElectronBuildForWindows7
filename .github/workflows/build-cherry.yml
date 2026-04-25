@@ -26,7 +26,7 @@ jobs:
           version: 10
 
       - name: Apply patches
-        run: git -C cherry-studio apply ../patches/0001-Patch-Cherry-Studio.patch
+        run: git -C cherry-studio apply --whitespace=fix ../patches/0001-Patch-Cherry-Studio.patch
 
       - name: Install dependencies (no scripts)
         working-directory: cherry-studio
