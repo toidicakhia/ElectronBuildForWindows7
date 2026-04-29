@@ -37,7 +37,8 @@ jobs:
         run: curl -L https://github.com/e3kskoy7wqk/Electron-for-windows-7/releases/download/v37.2.2/dist.zip -o dist.zip
 
       - name: Unzip custom electron
-        run: tar -xf dist.zip
+        shell: pwsh
+        run: Expand-Archive dist.zip -DestinationPath dist
 
       - name: Replace electron with custom version
         shell: cmd
