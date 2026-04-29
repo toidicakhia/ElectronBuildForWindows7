@@ -29,9 +29,13 @@ jobs:
         working-directory: cherry-studio
         run: git apply --ignore-space-change --ignore-whitespace ../patches/0001-Patch-Cherry-Studio.patch
 
-      - name: Install dependencies (no scripts)
+      - name: Install dependencies
         working-directory: cherry-studio
         run: pnpm i
+        
+      - name: Install electron-shutdown-handler
+        working-directory: cherry-studio
+        run: pnpm i get-wrecked/electron-shutdown-handler
 
       - name: Install electron@37.2.2
         working-directory: cherry-studio
