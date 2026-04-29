@@ -37,7 +37,9 @@ jobs:
 
       - name: Install dependencies
         working-directory: cherry-studio
-        run: pnpm i
+        run: |
+            npm config set electron_use_remote_checksums 1 -g
+            pnpm i
 
       - name: Patch shutdown handler
         run: python scripts/patch_shutdown_handler.py cherry-studio
