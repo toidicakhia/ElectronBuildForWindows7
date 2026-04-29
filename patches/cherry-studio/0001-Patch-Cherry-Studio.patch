@@ -1,0 +1,357 @@
+From ed7f5a8e45bc9391ceea73724cee900a64f3bf94 Mon Sep 17 00:00:00 2001
+From: toidicakhia <108525966+toidicakhia@users.noreply.github.com>
+Date: Wed, 29 Apr 2026 17:10:08 +0700
+Subject: [PATCH] Patch Cherry Studio
+
+---
+ package.json                             |  9 +--
+ pnpm-lock.yaml                           | 90 +++++++++++-------------
+ src/main/services/PowerMonitorService.ts |  2 +-
+ 3 files changed, 48 insertions(+), 53 deletions(-)
+
+diff --git a/package.json b/package.json
+index 28e114986..521ec5cf7 100644
+--- a/package.json
++++ b/package.json
+@@ -86,11 +86,11 @@
+   "dependencies": {
+     "@anthropic-ai/claude-agent-sdk": "0.2.81",
+     "@expo/sudo-prompt": "^9.3.2",
++    "@get-wrecked/electron-shutdown-handler": "github:get-wrecked/electron-shutdown-handler",
+     "@larksuiteoapi/node-sdk": "^1.59.0",
+     "@libsql/client": "0.14.0",
+     "@napi-rs/canvas": "0.1.80",
+     "@napi-rs/system-ocr": "1.0.2",
+-    "@paymoapp/electron-shutdown-handler": "1.1.2",
+     "cron-parser": "^5.0.8",
+     "express": "5.1.0",
+     "font-list": "2.0.0",
+@@ -312,7 +312,7 @@
+     "dotenv-cli": "^7.4.2",
+     "drizzle-kit": "^0.31.4",
+     "drizzle-orm": "^0.44.5",
+-    "electron": "41.2.1",
++    "electron": "37.2.2",
+     "electron-builder": "26.8.1",
+     "electron-devtools-installer": "^3.2.0",
+     "electron-reload": "^2.0.0-alpha.1",
+@@ -503,9 +503,9 @@
+       "@ai-sdk/deepseek@2.0.29": "patches/@ai-sdk__deepseek@2.0.29.patch"
+     },
+     "onlyBuiltDependencies": [
++      "@get-wrecked/electron-shutdown-handler",
+       "@j178/prek",
+       "@kangfenmao/keyv-storage",
+-      "@paymoapp/electron-shutdown-handler",
+       "@scarf/scarf",
+       "@swc/core",
+       "electron",
+@@ -518,7 +518,8 @@
+       "sharp",
+       "tesseract.js",
+       "zipfile"
+-    ]
++    ],
++    "ignoredBuiltDependencies": ["core-js"]
+   },
+   "packageManager": "pnpm@10.27.0",
+   "optionalDependencies": {
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+index f40a8dd47..3d5953a43 100644
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -102,6 +102,9 @@ importers:
+       '@expo/sudo-prompt':
+         specifier: ^9.3.2
+         version: 9.3.2
++      '@get-wrecked/electron-shutdown-handler':
++        specifier: github:get-wrecked/electron-shutdown-handler
++        version: https://codeload.github.com/get-wrecked/electron-shutdown-handler/tar.gz/3c320ec81366e99fa5107d4b9c4f9499deb9a4fa
+       '@larksuiteoapi/node-sdk':
+         specifier: ^1.59.0
+         version: 1.60.0
+@@ -114,9 +117,6 @@ importers:
+       '@napi-rs/system-ocr':
+         specifier: 1.0.2
+         version: 1.0.2(patch_hash=aa1a73e445ee644774745b620589bb99d85bee6c95cc2a91fe9137e580da5bde)
+-      '@paymoapp/electron-shutdown-handler':
+-        specifier: 1.1.2
+-        version: 1.1.2
+       cron-parser:
+         specifier: ^5.0.8
+         version: 5.5.0
+@@ -342,13 +342,13 @@ importers:
+         version: 3.1.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.8.3)
+       '@electron-toolkit/preload':
+         specifier: ^3.0.0
+-        version: 3.0.2(electron@41.2.1)
++        version: 3.0.2(electron@37.2.2)
+       '@electron-toolkit/tsconfig':
+         specifier: ^1.0.1
+         version: 1.0.1(@types/node@24.10.4)
+       '@electron-toolkit/utils':
+         specifier: ^3.0.0
+-        version: 3.0.0(electron@41.2.1)
++        version: 3.0.0(electron@37.2.2)
+       '@electron/notarize':
+         specifier: ^2.5.0
+         version: 2.5.0
+@@ -776,8 +776,8 @@ importers:
+         specifier: ^0.44.5
+         version: 0.44.7(@libsql/client@0.14.0)(@opentelemetry/api@1.9.0)
+       electron:
+-        specifier: 41.2.1
+-        version: 41.2.1
++        specifier: 37.2.2
++        version: 37.2.2
+       electron-builder:
+         specifier: 26.8.1
+         version: 26.8.1(electron-builder-squirrel-windows@26.1.0)
+@@ -2662,6 +2662,10 @@ packages:
+   '@floating-ui/utils@0.2.10':
+     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+ 
++  '@get-wrecked/electron-shutdown-handler@https://codeload.github.com/get-wrecked/electron-shutdown-handler/tar.gz/3c320ec81366e99fa5107d4b9c4f9499deb9a4fa':
++    resolution: {tarball: https://codeload.github.com/get-wrecked/electron-shutdown-handler/tar.gz/3c320ec81366e99fa5107d4b9c4f9499deb9a4fa}
++    version: 1.1.1
++
+   '@google/genai@1.46.0':
+     resolution: {integrity: sha512-ewPMN5JkKfgU5/kdco9ZhXBHDPhVqZpMQqIFQhwsHLf8kyZfx1cNpw1pHo1eV6PGEW7EhIBFi3aYZraFndAXqg==}
+     engines: {node: '>=20.0.0'}
+@@ -3951,9 +3955,6 @@ packages:
+     cpu: [x64]
+     os: [win32]
+ 
+-  '@paymoapp/electron-shutdown-handler@1.1.2':
+-    resolution: {integrity: sha512-/MIC+wdRlVw1Sm56qJcT17O/KBpQARP2tOcAgg1OKB4W83B9IyBBtIoLXkRlpCOEJnGEleuv5HiSBryUgwbFvQ==}
+-
+   '@pdf-lib/standard-fonts@1.0.0':
+     resolution: {integrity: sha512-hU30BK9IUN/su0Mn9VdlVKsWBS6GyhVfqjwl1FjZN4TxP6cCw0jP2w7V3Hf5uX7M0AZJ16vey9yE0ny7Sa59ZA==}
+ 
+@@ -5546,6 +5547,9 @@ packages:
+   '@types/node@18.19.130':
+     resolution: {integrity: sha512-GRaXQx6jGfL8sKfaIDD6OupbIHBr9jv7Jnaml9tB7l4v068PAOXqfcujMMo5PhbIs6ggR1XODELqahT2R8v0fg==}
+ 
++  '@types/node@22.19.17':
++    resolution: {integrity: sha512-wGdMcf+vPYM6jikpS/qhg6WiqSV/OhG+jeeHT/KlVqxYfD40iYJf9/AE1uQxVWFvU7MipKRkRv8NSHiCGgPr8Q==}
++
+   '@types/node@24.10.4':
+     resolution: {integrity: sha512-vnDVpYPMzs4wunl27jHrfmwojOGKya0xyM3sH+UE5iv5uPS6vX7UIoh6m+vQc5LGBq52HBKPIn/zcSZVzeDEZg==}
+ 
+@@ -7539,8 +7543,8 @@ packages:
+     resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
+     engines: {node: '>=8.0.0'}
+ 
+-  electron@41.2.1:
+-    resolution: {integrity: sha512-teeRThiYGTPKf/2yOW7zZA1bhb91KEQ4yLBPOg7GxpmnkLFLugKgQaAKOrCgdzwsXh/5mFIfmkm+4+wACJKwaA==}
++  electron@37.2.2:
++    resolution: {integrity: sha512-qEIUs+3elu7wOfzLEtLz4Innfe+8nQyhLh9qjrJY0d0MxdRolLMDUD9QwAQ743vDZ+bUg+gqwigzP7kV78S3hA==}
+     engines: {node: '>= 12.20.55'}
+     hasBin: true
+ 
+@@ -8965,9 +8969,6 @@ packages:
+   jsonfile@6.2.0:
+     resolution: {integrity: sha512-FGuPw30AdOIUTRMC2OMRtQV+jkVj2cfPqSeWXv1NEAJ1qZ5zb1X6z1mFhbfOB/iy3ssJCD+3KuZ8r8C3uVFlAg==}
+ 
+-  jsonfile@6.2.1:
+-    resolution: {integrity: sha512-zwOTdL3rFQ/lRdBnntKVOX6k5cKJwEc1HdilT71BWEu7J41gXIB2MRp+vxduPSwZJPWBxEzv4yH1wYLJGUHX4Q==}
+-
+   jsonpointer@5.0.1:
+     resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
+     engines: {node: '>=0.10.0'}
+@@ -10632,9 +10633,6 @@ packages:
+   psl@1.15.0:
+     resolution: {integrity: sha512-JZd3gMVBAVQkSs6HdNZo9Sdo0LNcQeMNP3CozBJb3JYC/QUYZTnKxP+f8oWRX4rHP5EurWxqAHTSwUCjlNKa1w==}
+ 
+-  pump@3.0.3:
+-    resolution: {integrity: sha512-todwxLMY7/heScKmntwQG8CXVkWUOdYxIvY2s0VWAAMh/nd8SoYiRaKjlr7+iCs984f2P8zvrfWcDDYVb73NfA==}
+-
+   pump@3.0.4:
+     resolution: {integrity: sha512-VS7sjc6KR7e1ukRFhQSY5LM2uBWAUPiOPa/A3mkKmiMwSmRFUITt0xuj+/lesgnCv+dPIEYlkzrcyXgquIHMcA==}
+ 
+@@ -12265,6 +12263,9 @@ packages:
+   undici-types@5.26.5:
+     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+ 
++  undici-types@6.21.0:
++    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
++
+   undici-types@7.16.0:
+     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
+ 
+@@ -14657,17 +14658,17 @@ snapshots:
+     transitivePeerDependencies:
+       - supports-color
+ 
+-  '@electron-toolkit/preload@3.0.2(electron@41.2.1)':
++  '@electron-toolkit/preload@3.0.2(electron@37.2.2)':
+     dependencies:
+-      electron: 41.2.1
++      electron: 37.2.2
+ 
+   '@electron-toolkit/tsconfig@1.0.1(@types/node@24.10.4)':
+     dependencies:
+       '@types/node': 24.10.4
+ 
+-  '@electron-toolkit/utils@3.0.0(electron@41.2.1)':
++  '@electron-toolkit/utils@3.0.0(electron@37.2.2)':
+     dependencies:
+-      electron: 41.2.1
++      electron: 37.2.2
+ 
+   '@electron/asar@3.4.1':
+     dependencies:
+@@ -14771,7 +14772,7 @@ snapshots:
+       '@malept/cross-spawn-promise': 2.0.0
+       debug: 4.4.3
+       dir-compare: 4.2.0
+-      fs-extra: 11.3.3
++      fs-extra: 11.3.4
+       minimatch: 9.0.6
+       plist: 3.1.0
+     transitivePeerDependencies:
+@@ -15072,6 +15073,11 @@ snapshots:
+ 
+   '@floating-ui/utils@0.2.10': {}
+ 
++  '@get-wrecked/electron-shutdown-handler@https://codeload.github.com/get-wrecked/electron-shutdown-handler/tar.gz/3c320ec81366e99fa5107d4b9c4f9499deb9a4fa':
++    dependencies:
++      node-addon-api: 5.1.0
++      prebuild-install: 7.1.3
++
+   '@google/genai@1.46.0(@modelcontextprotocol/sdk@1.27.1(@cfworker/json-schema@4.1.1)(zod@4.3.4))':
+     dependencies:
+       google-auth-library: 10.5.0
+@@ -15855,7 +15861,7 @@ snapshots:
+ 
+   '@npmcli/fs@4.0.0':
+     dependencies:
+-      semver: 7.7.3
++      semver: 7.7.1
+ 
+   '@open-draft/deferred-promise@2.2.0': {}
+ 
+@@ -16064,11 +16070,6 @@ snapshots:
+   '@oxlint/binding-win32-x64-msvc@1.56.0':
+     optional: true
+ 
+-  '@paymoapp/electron-shutdown-handler@1.1.2':
+-    dependencies:
+-      node-addon-api: 5.1.0
+-      prebuild-install: 7.1.3
+-
+   '@pdf-lib/standard-fonts@1.0.0':
+     dependencies:
+       pako: 1.0.11
+@@ -17722,6 +17723,10 @@ snapshots:
+     dependencies:
+       undici-types: 5.26.5
+ 
++  '@types/node@22.19.17':
++    dependencies:
++      undici-types: 6.21.0
++
+   '@types/node@24.10.4':
+     dependencies:
+       undici-types: 7.16.0
+@@ -20334,10 +20339,10 @@ snapshots:
+     transitivePeerDependencies:
+       - supports-color
+ 
+-  electron@41.2.1:
++  electron@37.2.2:
+     dependencies:
+       '@electron/get': 2.0.3
+-      '@types/node': 24.10.4
++      '@types/node': 22.19.17
+       extract-zip: 2.0.1
+     transitivePeerDependencies:
+       - supports-color
+@@ -21099,9 +21104,8 @@ snapshots:
+   fs-extra@11.3.4:
+     dependencies:
+       graceful-fs: 4.2.11
+-      jsonfile: 6.2.1
++      jsonfile: 6.2.0
+       universalify: 2.0.1
+-    optional: true
+ 
+   fs-extra@7.0.1:
+     dependencies:
+@@ -22094,13 +22098,6 @@ snapshots:
+     optionalDependencies:
+       graceful-fs: 4.2.11
+ 
+-  jsonfile@6.2.1:
+-    dependencies:
+-      universalify: 2.0.1
+-    optionalDependencies:
+-      graceful-fs: 4.2.11
+-    optional: true
+-
+   jsonpointer@5.0.1: {}
+ 
+   jsonrepair@3.13.1: {}
+@@ -23889,7 +23886,7 @@ snapshots:
+       node-abi: 4.28.0
+       noop-logger: 0.1.1
+       npmlog: 4.1.2
+-      pump: 3.0.3
++      pump: 3.0.4
+       rc: 1.2.8
+       simple-get: 3.1.1
+       tar-fs: 2.1.4
+@@ -23905,7 +23902,7 @@ snapshots:
+       mkdirp-classic: 0.5.3
+       napi-build-utils: 2.0.0
+       node-abi: 4.28.0
+-      pump: 3.0.3
++      pump: 3.0.4
+       rc: 1.2.8
+       simple-get: 4.0.1
+       tar-fs: 2.1.4
+@@ -24102,11 +24099,6 @@ snapshots:
+     dependencies:
+       punycode: 2.3.1
+ 
+-  pump@3.0.3:
+-    dependencies:
+-      end-of-stream: 1.4.5
+-      once: 1.4.0
+-
+   pump@3.0.4:
+     dependencies:
+       end-of-stream: 1.4.5
+@@ -25653,7 +25645,7 @@ snapshots:
+     dependencies:
+       chownr: 1.1.4
+       mkdirp-classic: 0.5.3
+-      pump: 3.0.3
++      pump: 3.0.4
+       tar-stream: 2.2.0
+ 
+   tar-stream@1.6.2:
+@@ -26078,6 +26070,8 @@ snapshots:
+ 
+   undici-types@5.26.5: {}
+ 
++  undici-types@6.21.0: {}
++
+   undici-types@7.16.0: {}
+ 
+   undici@6.23.0: {}
+diff --git a/src/main/services/PowerMonitorService.ts b/src/main/services/PowerMonitorService.ts
+index aab3906c9..05e1087d5 100644
+--- a/src/main/services/PowerMonitorService.ts
++++ b/src/main/services/PowerMonitorService.ts
+@@ -1,6 +1,6 @@
++import ElectronShutdownHandler from '@get-wrecked/electron-shutdown-handler'
+ import { loggerService } from '@logger'
+ import { isLinux, isMac, isWin } from '@main/constant'
+-import ElectronShutdownHandler from '@paymoapp/electron-shutdown-handler'
+ import { BrowserWindow } from 'electron'
+ import { powerMonitor } from 'electron'
+ 
+-- 
+2.45.1.windows.1
+

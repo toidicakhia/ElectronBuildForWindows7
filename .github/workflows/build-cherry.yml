@@ -32,32 +32,21 @@ jobs:
       - name: Install dependencies
         working-directory: cherry-studio
         run: pnpm i
-        
-      - name: Install electron-shutdown-handler
-        working-directory: cherry-studio
-        run: pnpm i get-wrecked/electron-shutdown-handler
-
-      - name: Install electron@37.2.2
-        working-directory: cherry-studio
-        run: pnpm add electron@37.2.2
 
       - name: Download custom electron@37.2.2
         run: curl -L https://github.com/e3kskoy7wqk/Electron-for-windows-7/releases/download/v37.2.2/dist.zip -o dist.zip
 
       - name: Unzip custom electron
-        shell: pwsh
-        run: Expand-Archive dist.zip -DestinationPath dist
+        run: tar -xf dist.zip
 
       - name: Replace electron with custom version
-        shell: pwsh
         run: |
-          $electronPath = "cherry-studio/node_modules/electron/dist"
+          set electronPath=cherry-studio\node_modules\electron\dist
+          if exist "%electronPath%" (rmdir /s /q "%electronPath%")
+          move dist cherry-studio\node_modules\electron\dist
 
-          if (Test-Path $electronPath) {
-            Remove-Item -Recurse -Force $electronPath
-          }
-
-          Move-Item -Path "dist" -Destination $electronPath
+      - name: Add dist to electron-shutdown-handler
+        run: robocopy sources\electron-shutdown-handler\dist cherry-studio\node_modules\electron-shutdown-handler\dist /E
 
       - name: Build Cherry Studio
         working-directory: cherry-studio
