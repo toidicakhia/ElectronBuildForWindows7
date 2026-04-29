@@ -11,19 +11,23 @@ jobs:
       - name: Checkout current repo
         uses: actions/checkout@v4
 
-      - name: Clone Cherry Studio
-        run: |
-          git clone https://github.com/CherryHQ/cherry-studio.git
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
 
-      - name: Install Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install pnpm
+      - name: Set up pnpm
         uses: pnpm/action-setup@v5
         with:
           version: 10
+
+      - name: Clone Cherry Studio
+        run: git clone https://github.com/CherryHQ/cherry-studio.git
 
       - name: Apply patches
         working-directory: cherry-studio
@@ -33,23 +37,11 @@ jobs:
         working-directory: cherry-studio
         run: pnpm i
 
-      - name: Download custom electron@37.2.2
-        run: curl -L https://github.com/e3kskoy7wqk/Electron-for-windows-7/releases/download/v37.2.2/dist.zip -o dist.zip
-
-      - name: Unzip custom electron
-        shell: pwsh
-        run: Expand-Archive dist.zip -DestinationPath dist
-
-      - name: Replace electron with custom version
-        shell: cmd
-        run: |
-          set electronPath=cherry-studio\node_modules\electron\dist
-          if exist %electronPath% rmdir /s /q "%electronPath%"
-          move dist cherry-studio\node_modules\electron\dist
-
-      - name: Add dist to electron-shutdown-handler
-        run: robocopy sources\electron-shutdown-handler\dist cherry-studio\node_modules\@get-wrecked\electron-shutdown-handler\dist /E
-        continue-on-error: true
+      - name: Patch Electron
+        run: python scripts/patch_electron.py cherry-studio
+      
+      - name: Patch shutdown handler
+        run: python scripts/patch_shutdown_handler.py cherry-studio
 
       - name: Build Cherry Studio
         working-directory: cherry-studio
@@ -59,4 +51,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cherry-studio-build
-          path: cherry-studio/dist/win-unpacked/*.exe
+          path: cherry-studio/dist/win-unpacked/*
