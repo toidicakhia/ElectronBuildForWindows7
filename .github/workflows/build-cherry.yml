@@ -42,7 +42,7 @@ jobs:
       - name: Replace electron with custom version
         run: |
           set electronPath=cherry-studio\node_modules\electron\dist
-          if exist "%electronPath%" (rmdir /s /q "%electronPath%")
+          if (exist "%electronPath%") (rmdir /s /q "%electronPath%")
           move dist cherry-studio\node_modules\electron\dist
 
       - name: Add dist to electron-shutdown-handler
