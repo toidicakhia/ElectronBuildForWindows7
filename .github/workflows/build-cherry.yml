@@ -40,6 +40,7 @@ jobs:
         run: tar -xf dist.zip
 
       - name: Replace electron with custom version
+        shell: cmd
         run: |
           set electronPath=cherry-studio\node_modules\electron\dist
           if exist %electronPath% rmdir /s /q "%electronPath%"
