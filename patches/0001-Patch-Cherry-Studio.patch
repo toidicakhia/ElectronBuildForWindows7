@@ -1,16 +1,16 @@
-From 4a6039b48f50caedff495c43af7e5036c2f5de43 Mon Sep 17 00:00:00 2001
+From 917577467e02f03b411cad0e484fb1edfdb1dd43 Mon Sep 17 00:00:00 2001
 From: toidicakhia <108525966+toidicakhia@users.noreply.github.com>
-Date: Sat, 25 Apr 2026 09:22:47 +0000
+Date: Wed, 29 Apr 2026 11:04:19 +0700
 Subject: [PATCH] Patch Cherry Studio
 
 ---
- package.json                             |  3 +-
+ package.json                             |  7 +++--
  pnpm-lock.yaml                           | 39 ++++++++++--------------
  src/main/services/PowerMonitorService.ts |  2 +-
- 3 files changed, 18 insertions(+), 26 deletions(-)
+ 3 files changed, 21 insertions(+), 27 deletions(-)
 
 diff --git a/package.json b/package.json
-index 38301e840..2d4c33833 100644
+index 28e114986..33e03aba8 100644
 --- a/package.json
 +++ b/package.json
 @@ -86,11 +86,11 @@
@@ -26,16 +26,29 @@ index 38301e840..2d4c33833 100644
      "cron-parser": "^5.0.8",
      "express": "5.1.0",
      "font-list": "2.0.0",
-@@ -505,7 +505,6 @@
+@@ -503,9 +503,9 @@
+       "@ai-sdk/deepseek@2.0.29": "patches/@ai-sdk__deepseek@2.0.29.patch"
+     },
      "onlyBuiltDependencies": [
++      "@get-wrecked/electron-shutdown-handler",
        "@j178/prek",
        "@kangfenmao/keyv-storage",
 -      "@paymoapp/electron-shutdown-handler",
        "@scarf/scarf",
        "@swc/core",
        "electron",
+@@ -518,7 +518,8 @@
+       "sharp",
+       "tesseract.js",
+       "zipfile"
+-    ]
++    ],
++    "ignoredBuiltDependencies": ["core-js"]
+   },
+   "packageManager": "pnpm@10.27.0",
+   "optionalDependencies": {
 diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
-index beda756f7..dab7f3341 100644
+index f40a8dd47..865ac4578 100644
 --- a/pnpm-lock.yaml
 +++ b/pnpm-lock.yaml
 @@ -102,6 +102,9 @@ importers:
@@ -174,5 +187,5 @@ index aab3906c9..05e1087d5 100644
  import { powerMonitor } from 'electron'
  
 -- 
-2.53.0
+2.45.1.windows.1
 
