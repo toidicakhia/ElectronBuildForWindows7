@@ -49,6 +49,7 @@ jobs:
 
       - name: Add dist to electron-shutdown-handler
         run: robocopy sources\electron-shutdown-handler\dist cherry-studio\node_modules\@get-wrecked\electron-shutdown-handler\dist /E
+        continue-on-error: true
 
       - name: Build Cherry Studio
         working-directory: cherry-studio
