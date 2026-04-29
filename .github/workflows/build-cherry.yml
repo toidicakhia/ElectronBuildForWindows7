@@ -27,15 +27,11 @@ jobs:
 
       - name: Apply patches
         working-directory: cherry-studio
-        run: git apply ../patches/0001-Patch-Cherry-Studio.patch
+        run: git apply --ignore-space-change --ignore-whitespace ../patches/0001-Patch-Cherry-Studio.patch
 
       - name: Install dependencies (no scripts)
         working-directory: cherry-studio
-        run: pnpm install --ignore-scripts
-
-      - name: Rebuild native modules
-        working-directory: cherry-studio
-        run: pnpm rebuild
+        run: pnpm i
 
       - name: Install electron@37.2.2
         working-directory: cherry-studio
