@@ -6,7 +6,9 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
+    env:
+      ELECTRON_MIRROR: "https://raw.githubusercontent.com/toidicakhia/resources/refs/heads/main/electron/"
+      electron_use_remote_checksums: 1
     steps:
       - name: Checkout current repo
         uses: actions/checkout@v4
@@ -37,9 +39,6 @@ jobs:
         working-directory: cherry-studio
         run: pnpm i
 
-      - name: Patch Electron
-        run: python scripts/patch_electron.py cherry-studio
-      
       - name: Patch shutdown handler
         run: python scripts/patch_shutdown_handler.py cherry-studio
 
