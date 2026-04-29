@@ -27,7 +27,7 @@ jobs:
 
       - name: Apply patches
         working-directory: cherry-studio
-        run: git apply --ignore-space-change --ignore-whitespace ../patches/0001-Patch-Cherry-Studio.patch
+        run: git apply --ignore-space-change --ignore-whitespace ../patches/cherry-studio/0001-Patch-Cherry-Studio.patch
 
       - name: Install dependencies
         working-directory: cherry-studio
@@ -46,7 +46,7 @@ jobs:
           move dist cherry-studio\node_modules\electron\dist
 
       - name: Add dist to electron-shutdown-handler
-        run: robocopy sources\electron-shutdown-handler\dist cherry-studio\node_modules\electron-shutdown-handler\dist /E
+        run: robocopy sources\electron-shutdown-handler\dist cherry-studio\node_modules\@get-wrecked\electron-shutdown-handler\dist /E
 
       - name: Build Cherry Studio
         working-directory: cherry-studio
