@@ -1,16 +1,27 @@
-From ed7f5a8e45bc9391ceea73724cee900a64f3bf94 Mon Sep 17 00:00:00 2001
+From 654bd3149608de2c2491f46eaeffcc0e9829fe31 Mon Sep 17 00:00:00 2001
 From: toidicakhia <108525966+toidicakhia@users.noreply.github.com>
-Date: Wed, 29 Apr 2026 17:10:08 +0700
+Date: Mon, 4 May 2026 12:57:04 +0700
 Subject: [PATCH] Patch Cherry Studio
 
 ---
- package.json                             |  9 +--
- pnpm-lock.yaml                           | 90 +++++++++++-------------
+ .npmrc                                   |  2 +
+ package.json                             |  8 ++-
+ pnpm-lock.yaml                           | 79 +++++++++++++-----------
  src/main/services/PowerMonitorService.ts |  2 +-
- 3 files changed, 48 insertions(+), 53 deletions(-)
+ 4 files changed, 51 insertions(+), 40 deletions(-)
+ create mode 100644 .npmrc
 
+diff --git a/.npmrc b/.npmrc
+new file mode 100644
+index 000000000..06ef73ec6
+--- /dev/null
++++ b/.npmrc
+@@ -0,0 +1,2 @@
++electron_use_remote_checksums=1
++electron_mirror=https://github.com/toidicakhia/resources/raw/refs/heads/main/electron/
+\ No newline at end of file
 diff --git a/package.json b/package.json
-index 28e114986..521ec5cf7 100644
+index 568ccef8f..4e60cba0b 100644
 --- a/package.json
 +++ b/package.json
 @@ -86,11 +86,11 @@
@@ -35,18 +46,15 @@ index 28e114986..521ec5cf7 100644
      "electron-builder": "26.8.1",
      "electron-devtools-installer": "^3.2.0",
      "electron-reload": "^2.0.0-alpha.1",
-@@ -503,9 +503,9 @@
-       "@ai-sdk/deepseek@2.0.29": "patches/@ai-sdk__deepseek@2.0.29.patch"
+@@ -503,6 +503,7 @@
+       "@ai-sdk/deepseek@2.0.30": "patches/@ai-sdk__deepseek@2.0.30.patch"
      },
      "onlyBuiltDependencies": [
 +      "@get-wrecked/electron-shutdown-handler",
        "@j178/prek",
        "@kangfenmao/keyv-storage",
--      "@paymoapp/electron-shutdown-handler",
-       "@scarf/scarf",
-       "@swc/core",
-       "electron",
-@@ -518,7 +518,8 @@
+       "@paymoapp/electron-shutdown-handler",
+@@ -518,7 +519,8 @@
        "sharp",
        "tesseract.js",
        "zipfile"
@@ -57,7 +65,7 @@ index 28e114986..521ec5cf7 100644
    "packageManager": "pnpm@10.27.0",
    "optionalDependencies": {
 diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
-index f40a8dd47..3d5953a43 100644
+index 603b5bfe3..2a38c94be 100644
 --- a/pnpm-lock.yaml
 +++ b/pnpm-lock.yaml
 @@ -102,6 +102,9 @@ importers:
@@ -107,7 +115,7 @@ index f40a8dd47..3d5953a43 100644
        electron-builder:
          specifier: 26.8.1
          version: 26.8.1(electron-builder-squirrel-windows@26.1.0)
-@@ -2662,6 +2662,10 @@ packages:
+@@ -2666,6 +2666,10 @@ packages:
    '@floating-ui/utils@0.2.10':
      resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
  
@@ -118,7 +126,7 @@ index f40a8dd47..3d5953a43 100644
    '@google/genai@1.46.0':
      resolution: {integrity: sha512-ewPMN5JkKfgU5/kdco9ZhXBHDPhVqZpMQqIFQhwsHLf8kyZfx1cNpw1pHo1eV6PGEW7EhIBFi3aYZraFndAXqg==}
      engines: {node: '>=20.0.0'}
-@@ -3951,9 +3955,6 @@ packages:
+@@ -3955,9 +3959,6 @@ packages:
      cpu: [x64]
      os: [win32]
  
@@ -128,7 +136,7 @@ index f40a8dd47..3d5953a43 100644
    '@pdf-lib/standard-fonts@1.0.0':
      resolution: {integrity: sha512-hU30BK9IUN/su0Mn9VdlVKsWBS6GyhVfqjwl1FjZN4TxP6cCw0jP2w7V3Hf5uX7M0AZJ16vey9yE0ny7Sa59ZA==}
  
-@@ -5546,6 +5547,9 @@ packages:
+@@ -5550,6 +5551,9 @@ packages:
    '@types/node@18.19.130':
      resolution: {integrity: sha512-GRaXQx6jGfL8sKfaIDD6OupbIHBr9jv7Jnaml9tB7l4v068PAOXqfcujMMo5PhbIs6ggR1XODELqahT2R8v0fg==}
  
@@ -138,7 +146,7 @@ index f40a8dd47..3d5953a43 100644
    '@types/node@24.10.4':
      resolution: {integrity: sha512-vnDVpYPMzs4wunl27jHrfmwojOGKya0xyM3sH+UE5iv5uPS6vX7UIoh6m+vQc5LGBq52HBKPIn/zcSZVzeDEZg==}
  
-@@ -7539,8 +7543,8 @@ packages:
+@@ -7543,8 +7547,8 @@ packages:
      resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
      engines: {node: '>=8.0.0'}
  
@@ -149,17 +157,7 @@ index f40a8dd47..3d5953a43 100644
      engines: {node: '>= 12.20.55'}
      hasBin: true
  
-@@ -8965,9 +8969,6 @@ packages:
-   jsonfile@6.2.0:
-     resolution: {integrity: sha512-FGuPw30AdOIUTRMC2OMRtQV+jkVj2cfPqSeWXv1NEAJ1qZ5zb1X6z1mFhbfOB/iy3ssJCD+3KuZ8r8C3uVFlAg==}
- 
--  jsonfile@6.2.1:
--    resolution: {integrity: sha512-zwOTdL3rFQ/lRdBnntKVOX6k5cKJwEc1HdilT71BWEu7J41gXIB2MRp+vxduPSwZJPWBxEzv4yH1wYLJGUHX4Q==}
--
-   jsonpointer@5.0.1:
-     resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
-     engines: {node: '>=0.10.0'}
-@@ -10632,9 +10633,6 @@ packages:
+@@ -10636,9 +10640,6 @@ packages:
    psl@1.15.0:
      resolution: {integrity: sha512-JZd3gMVBAVQkSs6HdNZo9Sdo0LNcQeMNP3CozBJb3JYC/QUYZTnKxP+f8oWRX4rHP5EurWxqAHTSwUCjlNKa1w==}
  
@@ -169,7 +167,7 @@ index f40a8dd47..3d5953a43 100644
    pump@3.0.4:
      resolution: {integrity: sha512-VS7sjc6KR7e1ukRFhQSY5LM2uBWAUPiOPa/A3mkKmiMwSmRFUITt0xuj+/lesgnCv+dPIEYlkzrcyXgquIHMcA==}
  
-@@ -12265,6 +12263,9 @@ packages:
+@@ -12269,6 +12270,9 @@ packages:
    undici-types@5.26.5:
      resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
  
@@ -179,7 +177,29 @@ index f40a8dd47..3d5953a43 100644
    undici-types@7.16.0:
      resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
  
-@@ -14657,17 +14658,17 @@ snapshots:
+@@ -12442,6 +12446,7 @@ packages:
+ 
+   uuid@10.0.0:
+     resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
++    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+     hasBin: true
+ 
+   uuid@11.1.0:
+@@ -12454,11 +12459,12 @@ packages:
+ 
+   uuid@3.4.0:
+     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
+-    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
++    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+     hasBin: true
+ 
+   uuid@9.0.1:
+     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
++    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+     hasBin: true
+ 
+   uzip@0.20201231.0:
+@@ -14665,17 +14671,17 @@ snapshots:
      transitivePeerDependencies:
        - supports-color
  
@@ -201,16 +221,7 @@ index f40a8dd47..3d5953a43 100644
  
    '@electron/asar@3.4.1':
      dependencies:
-@@ -14771,7 +14772,7 @@ snapshots:
-       '@malept/cross-spawn-promise': 2.0.0
-       debug: 4.4.3
-       dir-compare: 4.2.0
--      fs-extra: 11.3.3
-+      fs-extra: 11.3.4
-       minimatch: 9.0.6
-       plist: 3.1.0
-     transitivePeerDependencies:
-@@ -15072,6 +15073,11 @@ snapshots:
+@@ -15080,6 +15086,11 @@ snapshots:
  
    '@floating-ui/utils@0.2.10': {}
  
@@ -222,7 +233,7 @@ index f40a8dd47..3d5953a43 100644
    '@google/genai@1.46.0(@modelcontextprotocol/sdk@1.27.1(@cfworker/json-schema@4.1.1)(zod@4.3.4))':
      dependencies:
        google-auth-library: 10.5.0
-@@ -15855,7 +15861,7 @@ snapshots:
+@@ -15863,7 +15874,7 @@ snapshots:
  
    '@npmcli/fs@4.0.0':
      dependencies:
@@ -231,7 +242,7 @@ index f40a8dd47..3d5953a43 100644
  
    '@open-draft/deferred-promise@2.2.0': {}
  
-@@ -16064,11 +16070,6 @@ snapshots:
+@@ -16072,11 +16083,6 @@ snapshots:
    '@oxlint/binding-win32-x64-msvc@1.56.0':
      optional: true
  
@@ -243,7 +254,7 @@ index f40a8dd47..3d5953a43 100644
    '@pdf-lib/standard-fonts@1.0.0':
      dependencies:
        pako: 1.0.11
-@@ -17722,6 +17723,10 @@ snapshots:
+@@ -17730,6 +17736,10 @@ snapshots:
      dependencies:
        undici-types: 5.26.5
  
@@ -254,7 +265,7 @@ index f40a8dd47..3d5953a43 100644
    '@types/node@24.10.4':
      dependencies:
        undici-types: 7.16.0
-@@ -20334,10 +20339,10 @@ snapshots:
+@@ -20342,10 +20352,10 @@ snapshots:
      transitivePeerDependencies:
        - supports-color
  
@@ -267,32 +278,7 @@ index f40a8dd47..3d5953a43 100644
        extract-zip: 2.0.1
      transitivePeerDependencies:
        - supports-color
-@@ -21099,9 +21104,8 @@ snapshots:
-   fs-extra@11.3.4:
-     dependencies:
-       graceful-fs: 4.2.11
--      jsonfile: 6.2.1
-+      jsonfile: 6.2.0
-       universalify: 2.0.1
--    optional: true
- 
-   fs-extra@7.0.1:
-     dependencies:
-@@ -22094,13 +22098,6 @@ snapshots:
-     optionalDependencies:
-       graceful-fs: 4.2.11
- 
--  jsonfile@6.2.1:
--    dependencies:
--      universalify: 2.0.1
--    optionalDependencies:
--      graceful-fs: 4.2.11
--    optional: true
--
-   jsonpointer@5.0.1: {}
- 
-   jsonrepair@3.13.1: {}
-@@ -23889,7 +23886,7 @@ snapshots:
+@@ -23897,7 +23907,7 @@ snapshots:
        node-abi: 4.28.0
        noop-logger: 0.1.1
        npmlog: 4.1.2
@@ -301,7 +287,7 @@ index f40a8dd47..3d5953a43 100644
        rc: 1.2.8
        simple-get: 3.1.1
        tar-fs: 2.1.4
-@@ -23905,7 +23902,7 @@ snapshots:
+@@ -23913,7 +23923,7 @@ snapshots:
        mkdirp-classic: 0.5.3
        napi-build-utils: 2.0.0
        node-abi: 4.28.0
@@ -310,7 +296,7 @@ index f40a8dd47..3d5953a43 100644
        rc: 1.2.8
        simple-get: 4.0.1
        tar-fs: 2.1.4
-@@ -24102,11 +24099,6 @@ snapshots:
+@@ -24110,11 +24120,6 @@ snapshots:
      dependencies:
        punycode: 2.3.1
  
@@ -322,7 +308,7 @@ index f40a8dd47..3d5953a43 100644
    pump@3.0.4:
      dependencies:
        end-of-stream: 1.4.5
-@@ -25653,7 +25645,7 @@ snapshots:
+@@ -25661,7 +25666,7 @@ snapshots:
      dependencies:
        chownr: 1.1.4
        mkdirp-classic: 0.5.3
@@ -331,7 +317,7 @@ index f40a8dd47..3d5953a43 100644
        tar-stream: 2.2.0
  
    tar-stream@1.6.2:
-@@ -26078,6 +26070,8 @@ snapshots:
+@@ -26086,6 +26091,8 @@ snapshots:
  
    undici-types@5.26.5: {}
  

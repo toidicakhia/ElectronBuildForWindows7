@@ -6,9 +6,8 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    env:
-      ELECTRON_MIRROR: "https://github.com/toidicakhia/resources/raw/refs/heads/main/electron/"
-      electron_use_remote_checksums: 1
+    # env:
+    #   ELECTRON_MIRROR: "https://github.com/toidicakhia/resources/raw/refs/heads/main/electron/"
     steps:
       - name: Checkout current repo
         uses: actions/checkout@v4
@@ -37,10 +36,8 @@ jobs:
 
       - name: Install dependencies
         working-directory: cherry-studio
-        run: |
-            npm config set electron_use_remote_checksums 1 -g
-            pnpm i
-
+        run: pnpm i
+      
       - name: Patch shutdown handler
         run: python scripts/patch_shutdown_handler.py cherry-studio
 
