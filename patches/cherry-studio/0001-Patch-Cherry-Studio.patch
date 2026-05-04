@@ -1,14 +1,15 @@
-From 654bd3149608de2c2491f46eaeffcc0e9829fe31 Mon Sep 17 00:00:00 2001
+From 9ac09f9e736be82a14141c567451ac78dbf1fcfa Mon Sep 17 00:00:00 2001
 From: toidicakhia <108525966+toidicakhia@users.noreply.github.com>
-Date: Mon, 4 May 2026 12:57:04 +0700
+Date: Mon, 4 May 2026 13:26:21 +0700
 Subject: [PATCH] Patch Cherry Studio
 
 ---
  .npmrc                                   |  2 +
+ electron-builder.yml                     |  2 +-
  package.json                             |  8 ++-
  pnpm-lock.yaml                           | 79 +++++++++++++-----------
  src/main/services/PowerMonitorService.ts |  2 +-
- 4 files changed, 51 insertions(+), 40 deletions(-)
+ 5 files changed, 52 insertions(+), 41 deletions(-)
  create mode 100644 .npmrc
 
 diff --git a/.npmrc b/.npmrc
@@ -20,6 +21,19 @@ index 000000000..06ef73ec6
 +electron_use_remote_checksums=1
 +electron_mirror=https://github.com/toidicakhia/resources/raw/refs/heads/main/electron/
 \ No newline at end of file
+diff --git a/electron-builder.yml b/electron-builder.yml
+index 0cec02069..6f5284973 100644
+--- a/electron-builder.yml
++++ b/electron-builder.yml
+@@ -134,7 +134,7 @@ publish:
+   provider: generic
+   url: https://releases.cherry-ai.com
+ electronDownload:
+-  mirror: https://npmmirror.com/mirrors/electron/
++  mirror: https://github.com/toidicakhia/resources/raw/refs/heads/main/electron/
+ beforePack: scripts/before-pack.js
+ afterPack: scripts/after-pack.js
+ afterSign: scripts/notarize.js
 diff --git a/package.json b/package.json
 index 568ccef8f..4e60cba0b 100644
 --- a/package.json
