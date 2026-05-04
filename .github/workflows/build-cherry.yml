@@ -6,8 +6,8 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    # env:
-    #   ELECTRON_MIRROR: "https://github.com/toidicakhia/resources/raw/refs/heads/main/electron/"
+    env:
+      ELECTRON_MIRROR: "https://github.com/toidicakhia/resources/raw/refs/heads/main/electron/"
     steps:
       - name: Checkout current repo
         uses: actions/checkout@v4
